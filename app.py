@@ -5,7 +5,8 @@ from pathlib import Path
 from typing import Optional
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
+# Update line 8 to include FileResponse:
+from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse, FileResponse
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
@@ -28,6 +29,11 @@ def home():
 @app.get("/config")
 def get_config():
   return JSONResponse({"google_client_id": os.getenv("GOOGLE_CLIENT_ID", "")})
+
+
+@app.get("/favicon.ico", response_class=FileResponse)
+def get_favicon():
+  return FileResponse(Path(__file__).parent / "image.png")
 
 
 class MessageItem(BaseModel):
