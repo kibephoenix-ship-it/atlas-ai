@@ -52,7 +52,7 @@ def chat(req: ChatRequest):
 
       # Nano Banana Imagen 3 Generation
       if active_persona == "banana" and last_msg:
-        yield f"data: {json.dumps({'text': '🎨 Generating high-resolution artwork with Imagen 3...\\n\\n'})}\n\n"
+        yield f"data: {json.dumps({'text': 'Generating image with Imagen 3...\\n\\n'})}\n\n"
         result = client.models.generate_images(
             model="imagen-3.0-generate-002",
             prompt=last_msg.text,
